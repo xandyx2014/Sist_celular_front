@@ -1,0 +1,32 @@
+<h1 mat-dialog-title>Crear Formulario</h1>
+<div mat-dialog-content>
+  <form [formGroup]="myForm">
+      <mat-form-field>
+          <input formControlName="fechaPedido"  matInput  required [matDatepicker]="picker" placeholder="Fecha Pedido">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      <mat-form-field>
+          <input formControlName="fechaEntrega" required matInput [matDatepicker]="pickerDate" placeholder="Fecha Entrega">
+          <mat-datepicker-toggle matSuffix [for]="pickerDate"></mat-datepicker-toggle>
+          <mat-datepicker #pickerDate></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field>
+          <mat-label>Cliente</mat-label>
+          <select formControlName="cliente_id" matNativeControl required>
+            <option [value]="cliente.id" *ngFor="let cliente of clientes" [disabled]="cliente.deletedAt !== null">{{cliente.nombre}}</option>
+          </select>
+      </mat-form-field>
+      <mat-form-field>
+          <mat-label>Tecnico</mat-label>
+          <select formControlName="tecnico_id" matNativeControl required>
+            <option *ngFor="let tecnico of tecnicos" [value]="tecnico.id" [disabled]="tecnico.deletedAt !== null">{{ tecnico.nombre }}</option>
+          </select>
+        </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No</button>
+  <button *ngIf="buttonCrear()" mat-button cdkFocusInitial (click)="storeFormulario()" >Crear</button>
+  <button  *ngIf="!buttonCrear()" mat-button cdkFocusInitial (click)="updateFormulario()" >Actualizar</button>
+</div>

@@ -1,0 +1,91 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{titulo}}</mat-card-title>
+    <mat-card-subtitle>subtitle</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <div fxLayout="row">
+        <mat-card class="card-formulario">
+          <mat-card-header>
+            <mat-card-title>Datos Personales del</mat-card-title>
+            <mat-card-subtitle>Cliente</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+              <mat-list role="list" *ngIf="cliente">
+                  <mat-list-item role="listitem">Nombre: {{cliente.nombre}}</mat-list-item>
+                  <mat-list-item role="listitem">Telefono: {{cliente.telefono}}</mat-list-item>
+                  <mat-list-item role="listitem">calle: {{cliente.direccion}}</mat-list-item>
+                  <mat-list-item role="listitem">correo: {{cliente.correo}}</mat-list-item>
+                </mat-list>
+          </mat-card-content>
+        </mat-card>
+        <mat-card class="card-formulario">
+          <mat-card-header>
+            <mat-card-title>Datos Personales del</mat-card-title>
+            <mat-card-subtitle>Tecnico</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+              <mat-list role="list" *ngIf="tecnico">
+                  <mat-list-item role="listitem">Nombre: {{tecnico.nombre}}</mat-list-item>
+                  <mat-list-item role="listitem">Telefono: {{tecnico.telefono}}</mat-list-item>
+                  <mat-list-item role="listitem">calle: {{tecnico.direccion}}</mat-list-item>
+                  <mat-list-item role="listitem">correo: {{tecnico.correo}}</mat-list-item>
+                </mat-list>
+          </mat-card-content>
+        </mat-card>
+    </div>
+      <mat-form-field>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar">
+      </mat-form-field>
+      <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Id. </th>
+          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+        <ng-container matColumnDef="descripcion">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Descripcion </th>
+          <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
+        </ng-container>
+        <ng-container matColumnDef="precioTotal">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> precioTotal </th>
+          <td mat-cell *matCellDef="let element"> {{element.precioTotal}} </td>
+        </ng-container>
+        <ng-container matColumnDef="estado">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
+            <td mat-cell *matCellDef="let element">
+              <span [ngClass]="{'estadoEliminado': !verEstado(element),
+              'estadoActivo': verEstado(element)}"> {{ verEstado(element)}}</span>
+          </td>
+          </ng-container>
+        <ng-container matColumnDef="detalleFormulario_id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> id Formulario </th>
+          <td mat-cell *matCellDef="let element"> {{element.detalleFormulario_id}} </td>
+        </ng-container>
+        <ng-container matColumnDef="item_id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Item id. </th>
+          <td mat-cell *matCellDef="let element"> <button (click)="verItem(element.Item)" mat-raised-button color="primary" [disabled]="!verEstado(element)"> Ver Item</button> </td>
+        </ng-container>
+        <ng-container matColumnDef="categoria">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Categoria Item. </th>
+          <td mat-cell *matCellDef="let element"> <button (click)="verCategoria(element.Item.Categorium)" mat-raised-button color="accent" [disabled]="!verEstado(element)"> Categoria</button> </td>
+        </ng-container>
+        <ng-container matColumnDef="actualizar">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Actualizar. </th>
+          <td mat-cell *matCellDef="let element"> <button (click)="openDialog(element)" mat-raised-button color="accent" [disabled]="!verEstado(element)"> Actualizar detalle.</button> </td>
+        </ng-container>
+        <ng-container matColumnDef="eliminar">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Eliminar. </th>
+          <td mat-cell *matCellDef="let element"> <button mat-raised-button color="warn" [disabled]="!verEstado(element)" [disabled]="!verEstado(element)" (click)="deleteDetalle(element)"> Eliminar</button> </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons itemsPerPageLabel="item por pagina"></mat-paginator>
+  </mat-card-content>
+  <mat-card-actions>
+    Total a Pagar: {{totalPagar}}
+  </mat-card-actions>
+</mat-card>

@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>Crear Cliente</h1>
+<div mat-dialog-content>
+  <form [formGroup]="myForm">
+  <mat-form-field>
+    <input matInput  formControlName="nombre"  placeholder="Nombre">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput  formControlName="direccion" placeholder="Direccion">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput  formControlName="telefono" placeholder="Telefono">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput formControlName="correo" placeholder="Correo">
+  </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No</button>
+  <button *ngIf="buttonCrear()" mat-button cdkFocusInitial (click)="storeCliente()" [disabled]="!myForm.valid">Crear</button>
+  <button *ngIf="!buttonCrear()" mat-button cdkFocusInitial (click)="updateCliente()" >Actualizar</button>
+
+</div>

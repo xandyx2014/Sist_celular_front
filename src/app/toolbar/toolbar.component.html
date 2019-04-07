@@ -1,0 +1,18 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row
+  [ngClass.xs]="{'fxClass-sm': true}"
+  fxLayout="row"
+  fxLayout.lt-sm="column">
+
+      <mat-icon [fxShow]="isLogin()" fxHide.xs="true" (click)="onClick()" aria-hidden="false" aria-label="Example home icon">list</mat-icon>
+      <div fxLayoutGap="20px" *ngIf="isLogin()">
+      <a routerLink="/pages/clientes">Cliente</a>
+      <a routerLink="/pages/formulario">Formulario</a>
+      <a routerLink="/pages/tecnicos">Tecnicos</a>
+      <a routerLink="/pages/categorias">Categorias</a>
+      <a routerLink="/pages/items">Items</a>
+      <a (click)="logout()" routerLink="/login">Logout</a>
+      </div>
+      <a  *ngIf="!isLogin()" routerLink="/login">Login</a>
+  </mat-toolbar-row>
+</mat-toolbar>

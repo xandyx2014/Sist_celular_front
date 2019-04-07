@@ -1,0 +1,22 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{titulo}}</mat-card-title>
+    <mat-card-subtitle>subtitle</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content fxLayoutAlign="center">
+    <mat-card fxLayoutAlign="center" style="width: 25%;" fxLayout="column">
+      <form [formGroup]="myForm" class="example-form" fxLayout="column">
+        <mat-form-field>
+          <input matInput formControlName="usuario" placeholder="Usuario" required>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input type="password" formControlName="password" matInput placeholder="Contraseña" required>
+        </mat-form-field>
+      </form>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="login()" [disabled]="!myForm.valid">Enviar</button>
+      </mat-card-actions>
+    </mat-card>
+  </mat-card-content>
+</mat-card>

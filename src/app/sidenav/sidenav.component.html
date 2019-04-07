@@ -1,0 +1,26 @@
+<mat-sidenav-container
+    class="example-container" (backdropClick)="close('backdrop')">
+  <mat-sidenav #sidenav (keydown.escape)="close('escape')" disableClose>
+      <mat-list fxLayout="column" fxLayoutGap="20px">
+          <mat-list-item  (click)="this.sidenav.close()">
+            <a routerLink="/pages/clientes">Cliente</a>
+          </mat-list-item>
+          <mat-list-item (click)="this.sidenav.close()">
+            <a routerLink="/pages/formulario">Formulario</a>
+          </mat-list-item>
+          <mat-list-item (click)="this.sidenav.close()">
+            <a routerLink="/pages/tecnicos">Tecnicos</a>
+          </mat-list-item>
+          <mat-list-item (click)="this.sidenav.close()">
+            <a routerLink="/pages/categorias">Categorias</a>
+          </mat-list-item>
+          <mat-list-item (click)="this.sidenav.close()">
+            <a routerLink="/pages/items">Items</a></mat-list-item>
+        </mat-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <app-toolbar (toolbar)="sidenav.open()"></app-toolbar>
+      <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

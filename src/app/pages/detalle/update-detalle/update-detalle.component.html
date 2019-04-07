@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>Actualizar Detalle Venta</h1>
+<div mat-dialog-content>
+  <form [formGroup]="myForm">
+        <mat-form-field class="example-full-width">
+          <input formControlName="descripcion" matInput placeholder="Descripcion " required >
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input formControlName="precioTotal"  (keypress)="numberOnly($event)" matInput placeholder="Precio Total" required >
+        </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No</button>
+  <button [disabled]="!myForm.valid" mat-button cdkFocusInitial (click)="updateDetalle()">Actualizar</button>
+</div>

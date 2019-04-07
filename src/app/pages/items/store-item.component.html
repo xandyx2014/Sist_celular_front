@@ -1,0 +1,26 @@
+<h1 mat-dialog-title>Crear Items</h1>
+<div mat-dialog-content>
+  <form [formGroup]="myForm">
+  <mat-form-field>
+    <input matInput  formControlName="nombre"  placeholder="Nombre" required>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput  formControlName="marca" placeholder="Marca" required>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput  formControlName="modelo" placeholder="Modelo" required>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Categorias</mat-label>
+    <select formControlName="categoria_id" matNativeControl required>
+      <option [value]="categoria.id" *ngFor="let categoria of categorias" [disabled]="categoria.deletedAt !== null">{{categoria.Nombre}}</option>
+    </select>
+  </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No</button>
+  <button *ngIf="buttonCrear()" mat-button cdkFocusInitial (click)="storeItem()" [disabled]="!myForm.valid">Crear</button>
+  <button *ngIf="!buttonCrear()" mat-button cdkFocusInitial (click)="updateItem()">Actualizar</button>
+</div>
+
